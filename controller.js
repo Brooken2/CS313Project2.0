@@ -1,6 +1,8 @@
 const { Pool, Client } = require('pg')
 
 const pool = new Pool({
+	connectionString: process.env.DATABASE_URL,
+  	ssl: true,
   user: 'tuser',
   host: 'localhost',
   database: 'goaltracker',
@@ -19,7 +21,7 @@ function getUser(req, res){
 	  		if (err) {
     				return console.error('Error acquiring client', err.stack);
   			}
-  			client.query('SELECT * FROM users WHERE id=id', function (err, result) {
+  			client.query('SELECT * FROM users'/*WHERE id=id'*/, function (err, result) {
     					client.release();
     					if (err) {
       					return console.error('Error executing query', err.stack);
@@ -36,7 +38,7 @@ function getGoals(req, res){
 	  		if (err) {
     				return console.error('Error acquiring client', err.stack);
   			}
-  			client.query('SELECT * FROM goals WHERE userid=id', function (err, result) {
+  			client.query('SELECT * FROM goals'/*WHERE id=id*/, function (err, result) {
     					client.release();
     					if (err) {
       					return console.error('Error executing query', err.stack);

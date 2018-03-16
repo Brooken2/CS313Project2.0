@@ -8,7 +8,7 @@ CREATE TABLE public.goals
 	goalname VARCHAR(100) NOT NULL,
 	enddate VARCHAR(10) NOT NULL,
 	description VARCHAR(200) NOT NULL,
-	userid INT NOT NULL REFErENCES public.users(id)
+	userid INT NOT NULL REFERENCES public.users(id)
 );
 
 CREATE TABLE public.users
@@ -17,7 +17,6 @@ CREATE TABLE public.users
 	username VARCHAR(100) NOT NULL UNIQUE,
 	password VARCHAR(100) NOT NULL,
 	display_name VARCHAR(100) NOT NULL,
-	goalid INT NOT NULL REFERENCES public.users(id)
 );
 
 ALTER TABLE public.users ADD COLUMN goalid INT REFERENCES public.goals(id);
