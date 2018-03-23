@@ -7,7 +7,6 @@ function login(){
            if (xmlhttp.status == 200){ 
 		      console.log(this.responseText);
 			   updatePage(this.responseText);
-			   console.log(this.responseText);
            }
            else if (xmlhttp.status == 400) {
               alert('There was an error 400');
@@ -24,11 +23,17 @@ function login(){
 }
 
 function updatePage(results){
-	var json = results;
+	var json = JSON.parse(results);
+	console.log(json);
 	var out = "";
 	var i;
-	for(i = 0; i < results.length; i++){
-		out += '<h1>Welcome To Your Goals ' + json[i] + '</h1>';
+	out += '<h1>Welcome To Your Goals</h1> ';
+	for(i = 0; i < json.length; i++){
+		out += '<div>' + json[i].goalname + '</div>';
 	}
 	document.getElementById("div1").innerHTML = out;
+	
+	
+	
+	
 }

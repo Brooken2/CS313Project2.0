@@ -26,17 +26,19 @@ function getUser(req, res){
 
 function getGoals(id, callback){
 	console.log('projects are called');
-	pool.query('SELECT * FROM goals WHERE userid = $1', [id], function(err, res){
+	pool.query('SELECT * FROM goals WHERE userid=$1', [id], function(err, res){
 		if(err){
 			throw err;
 		}else {
 			console.log('back from DB with: ' +  JSON.stringify(res.rows));
 		
-			var result = res.rows
+			var result = {
+				status: 'success',
+				list: res.rows
+			}
 			callback(null, result);
 		}
 	})
-		
 }
 
 module.exports = {
