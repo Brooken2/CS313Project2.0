@@ -18,7 +18,8 @@ function login(){
         }
     };
 
-    xmlhttp.open("GET", "/getUser?id=1", true);
+	//ID for Heroku 3, other 1
+    xmlhttp.open("GET", "/getUser?id=3", true);
     xmlhttp.send();	
 }
 
