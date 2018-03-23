@@ -15,6 +15,7 @@ function homeGoals(req, res){
 
 function getUser(req, res){
 	console.log('Users have been called');
+	
 	var id = req.query.id;
 	console.log('requested id: ' + id);
 	getGoals(id, function(err, result){
