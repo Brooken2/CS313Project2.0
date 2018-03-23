@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Goal Page</title>
+	<script src="ajax.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+    		$("#btnLogin").click(function(){
+        		$("#loginHide").hide(1000);
+    		});
+	});
+</script>
+</head>
+<body>
+
+<div id="loginHide">
+	<h1>Login To Start Your Goals</h1>
+	User Name: <input type="text" id="user" placeholder="User Name"><br />
+	Password: <input type="password" id="pass" placeholder="Password">
+	<button id="btnLogin" onclick="login()">Login</button>
+</div>
+
+<div id="div1">
+</div>
+
+
+</body>
+</html>

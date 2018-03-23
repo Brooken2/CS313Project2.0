@@ -8,7 +8,6 @@ app.use(express.static(__dirname + '/public'));
 // views is directory for all template files
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
 app.get('/getGoals',controller. getGoals);
 app.get('/getUser', controller.getUser);
 app.get('/home', controller.homeGoals);

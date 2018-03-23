@@ -1,8 +1,6 @@
 const { Pool, Client } = require('pg')
 
 const pool = new Pool({
-	connectionString: process.env.DATABASE_URL,
-  	ssl: true,
   user: 'tuser',
   host: 'localhost',
   database: 'goaltracker',
@@ -14,38 +12,31 @@ function homeGoals(req, res){
 	console.log('home page has been called');
 	res.render('homeGoals');
 }
+
 function getUser(req, res){
 	console.log('Users have been called');
-	var id= 1;
-		pool.connect(function (err, client, release) {
-	  		if (err) {
-    				return console.error('Error acquiring client', err.stack);
-  			}
-  			client.query('SELECT * FROM users'/*WHERE id=id'*/, function (err, result) {
-    					client.release();
-    					if (err) {
-      					return console.error('Error executing query', err.stack);
-    					}
-				res.json(result.rows);
-  			})
-		})
+	var id = req.query.id;
+	console.log('requested id: ' + id);
+	getGoals(id, function(err, result){
+		res.json(result);
+	});
+	
+	
 }
 
-function getGoals(req, res){
+function getGoals(id, callback){
 	console.log('projects are called');
-	var id= 1;
-		pool.connect(function (err, client, release) {
-	  		if (err) {
-    				return console.error('Error acquiring client', err.stack);
-  			}
-  			client.query('SELECT * FROM goals'/*WHERE id=id*/, function (err, result) {
-    					client.release();
-    					if (err) {
-      					return console.error('Error executing query', err.stack);
-    					}
-				res.json(result.rows);
-  			})
-		})
+	pool.query('SELECT * FROM goals WHERE userid = $1', [id], function(err, res){
+		if(err){
+			throw err;
+		}else {
+			console.log('back from DB with: ' +  JSON.stringify(res.rows));
+		
+			var result = res.rows
+			callback(null, result);
+		}
+	})
+		
 }
 
 module.exports = {
@@ -54,19 +45,32 @@ module.exports = {
 	homeGoals: homeGoals
 };
 
-/*pool.query('SELECT * FROM goals', function (err, res) {
-  console.log(res);
-	//res.send();
-  pool.end()
-})*/
-/*const express = require('express')
-const path = require('path')
-	
-const PORT = process.env.PORT || 5000
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))*/
+	/*FROM GETUSER JUST IN CASE I NEED LATER
+pool.connect(function (err, client, release) {
+	  		if (err) {
+    				return console.error('Error acquiring client', err.stack);
+  			}
+  			client.query('SELECT * FROM users', function (err, result) {
+    					client.release();
+    					if (err) {
+      					return console.error('Error executing query', err.stack);
+    					}
+				res.json(result.rows);
+				});
+  			})
+		})*/
+
+/*FROM GET GOALS JUST IN CASE I NEED LATER
+	pool.connect(function (err, client, release) {
+	  		if (err) {
+    				return console.error('Error acquiring client', err.stack);
+  			}
+  			client.query('SELECT * FROM goals WHERE userid=$1::text', [id] , function (err, result) {
+    					client.release();
+    					if (err) {
+      					return console.error('Error executing query', err.stack);
+    					}
+				res.json(result.rows);
+  			})
+		})*/
