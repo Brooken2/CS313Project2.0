@@ -75,8 +75,8 @@ function getUser(req, res){
 }
 
 function getGoals(id, callback){
-	console.log('projects are called');
-	pool.query('SELECT * FROM goals WHERE userid=$1', [id], function(err, res){
+	console.log('GET GOALS is CALLED  WITH id: ' + id);
+	pool.query("SELECT * FROM goals WHERE userid='" + id + "'", function(err, res){
 		if(err){
 			throw err;
 		}
