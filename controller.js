@@ -16,32 +16,24 @@ function homeGoals(req, res){
 
 function addGoals(req, res){
 	console.log('Add Goals');
-		// Extract the validation errors from a request.
-   const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        // There are errors. Render form again with sanitized values/errors messages.
-        console.log('We ave some errors that happened');
-     }
-    else {
-		var userid = req.session.user;
-		var name = req.query.gname;
-		var endDate = req.query.endDate;
-		var des = req.query.desciption;
-		console.log(name + endDate + des);
+	var userid = "1";
+	var name = req.query.gname;
+	var endDate = req.query.endDate;
+	var des = req.query.desciption;
+	console.log(name + endDate + des + userid);
 		
-		pool.connect(function (err, client, release) {
-	  		if (err) {
-    				return console.error('Error acquiring client', err.stack);
-  			}
-  			client.query("INSERT INTO goals(goalname, enddate, description, userid) VALUES ('"+ name + "', '" + endDate + "', '"  +des +"', '" +userid  + "')"  , function (err, result) {
-    					client.release();
-    					if (err) {
-      					return console.error('Error executing query', err.stack);
-    					}
-				res.json(result.rows);
-  			});
-		});	
-	}
+	pool.connect(function (err, client, release) {
+  		if (err) {
+  				return console.error('Error acquiring client', err.stack);
+		}
+ 		client.query("INSERT INTO goals(goalname, enddate, description, userid) VALUES ('"+ name + "', '" + endDate + "', '"  +des +"', '" +userid  + "')"  , function (err, result) {
+    				client.release();
+    				if (err) {
+      				return console.error('Error executing query', err.stack);
+    				}
+			res.json(result.rows);
+  		});
+	});	
 }
 
 function getUser(req, res){
@@ -64,9 +56,9 @@ function getUser(req, res){
 				id = results.rows.id;
 			});
   	});*/
-	var sessData = req.session;
-  	sessData.id = id;
-	
+	//var sessData = req.session;
+  	//sessData.id = id;
+	var id = "1"	
 	console.log('requested id: ' + id);
 	
 	getGoals(id, function(err, result){
