@@ -46,7 +46,24 @@ function addGoals(req, res){
 
 function getUser(req, res){
 	console.log('Users have been called');
-	var id = req.query.id;
+	var id = "1";
+	var username = req.query.username;
+	var pass = req.query.pass;
+	
+	/*pool.connect(function (err, client, release) {
+	  		if (err) {
+    				return console.error('Error acquiring client', err.stack);
+  			}
+  			client.query("SELECT * FROM users WHERE username='" + username +"'", function (err, result) {
+    					client.release();
+    					if (err) {
+      					return console.error('Error executing query', err.stack);
+    					}
+				//res.json(result.rows);
+				console.log(JSON.parse(results.rows.id));
+				id = results.rows.id;
+			});
+  	});*/
 	var sessData = req.session;
   	sessData.id = id;
 	
