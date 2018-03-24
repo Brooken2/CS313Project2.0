@@ -6,7 +6,7 @@ const pool = new Pool({
   host: 'localhost',
   database: 'goaltracker',
   password: 'tpass',
-  port: 5432
+  port: process.env.PORT || 5432
 });
 
 function homeGoals(req, res){
