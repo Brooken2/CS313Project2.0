@@ -15,7 +15,7 @@ function login(){
                alert('something else other than 200 was returned, Taylor says not 400 either, probs like 342');
            }
         }
-    };
+    }
 
 	//ID for Heroku 3, other 1
     xmlhttp.open("GET", "/getUser?id=1", true);

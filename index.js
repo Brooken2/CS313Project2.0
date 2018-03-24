@@ -1,12 +1,9 @@
 var express = require('express');
-const { body,validationResult } = require('express-validator/check');
-const { sanitizeBody } = require('express-validator/filter');
 var controller = require('./controller.js');
 var session = require('client-sessions');
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
-app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
 app.use(express.static(__dirname + '/public'));

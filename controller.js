@@ -1,5 +1,4 @@
 const { Pool, Client } = require('pg')
-const { check, validationResult } = require('express-validator/check')
 
 const pool = new Pool({
   user: 'tuser',
@@ -34,16 +33,13 @@ function addGoals(req, res){
 	  		if (err) {
     				return console.error('Error acquiring client', err.stack);
   			}
-			var dataBase = [
-				[name, endDate, des, 1]
-				];
   			client.query("INSERT INTO goals(goalname, enddate, description, userid) VALUES ('"+ name + "', '" + endDate + "', '"  +des +"', '" +userid  + "')"  , function (err, result) {
     					client.release();
     					if (err) {
       					return console.error('Error executing query', err.stack);
     					}
 				res.json(result.rows);
-  			})
+  			});
 		});	
 	}
 }
