@@ -6,7 +6,7 @@ const pool = new Pool({
   host: 'localhost',
   database: 'goaltracker',
   password: 'tpass',
-  port: 5432,
+  port: 5432
 });
 
 function homeGoals(req, res){
@@ -25,7 +25,6 @@ function addGoals(req, res){
      }
     else {
 		var userid = req.session.user;
-	
 		var name = req.query.gname;
 		var endDate = req.query.endDate;
 		var des = req.query.desciption;
