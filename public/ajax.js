@@ -10,7 +10,7 @@ function login(){
 	$.post("/login", params, function(result) {
 		if (result && result.success) {
 			$("#status").text("Logging in was a success");
-			 //res.redirect('public/homeGoals.html');
+			differentLogin();
 		} else {
 			$("#status").text("Error logging in.");
 		}
@@ -35,7 +35,7 @@ function differentLogin(){
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == XMLHttpRequest.DONE) {
            if (xmlhttp.status == 200){ 
-		      //console.log(this.responseText);
+				console.log(this.responseText);
 			   updatePage(this.responseText);
            }
            else if (xmlhttp.status == 400) {
@@ -48,7 +48,7 @@ function differentLogin(){
     }
 
 	//ID for Heroku 3, other 1
-    xmlhttp.open("GET", "/getUser?id=1", true);
+    xmlhttp.open("GET", "/getUser", true);
     xmlhttp.send();	
 }
 

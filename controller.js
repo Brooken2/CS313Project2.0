@@ -39,8 +39,8 @@ function addGoals(req, res){
 function getUser(req, res){
 	console.log('Users have been called');
 	var id = "1";
-	var username = req.query.username;
-	var pass = req.query.pass;
+	//var username = req.query.username;
+	//var pass = req.query.pass;
 	
 	/*pool.connect(function (err, client, release) {
 	  		if (err) {
