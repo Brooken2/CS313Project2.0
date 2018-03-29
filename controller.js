@@ -26,7 +26,7 @@ function addGoals(req, res){
   		if (err) {
   				return console.error('Error acquiring client', err.stack);
 		}
- 		client.query("INSERT INTO goals(goalname, enddate, description, userid) VALUES ('"+ name + "', '" + endDate + "', '"  +des +"', '" +userid  + "')"  , function (err, result) {
+ 		client.query("INSERT INTO goals(goalname, enddate, description, userid) VALUES ('"+ name + "', '" + endDate + "', '"  + des +"', '" +userid  + "')"  , function (err, result) {
     				client.release();
     				if (err) {
       				return console.error('Error executing query', err.stack);
@@ -68,7 +68,8 @@ function getUser(req, res){
 
 function getGoals(id, callback){
 	console.log('GET GOALS is CALLED  WITH id: ' + id);
-	pool.query("SELECT * FROM goals WHERE userid='" + id + "'", function(err, res){
+	var value = id;
+	pool.query("SELECT * FROM goals WHERE userid=$1",[value], function(err, res){
 		if(err){
 			throw err;
 		}

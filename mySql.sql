@@ -16,7 +16,7 @@ CREATE TABLE public.users
 	id SERIAL NOT NULL PRIMARY KEY,
 	username VARCHAR(100) NOT NULL UNIQUE,
 	password VARCHAR(100) NOT NULL,
-	display_name VARCHAR(100) NOT NULL,
+	display_name VARCHAR(100) NOT NULL
 );
 
 ALTER TABLE public.users ADD COLUMN goalid INT REFERENCES public.goals(id);
